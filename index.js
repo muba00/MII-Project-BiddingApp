@@ -1,11 +1,21 @@
-const express = require('express')
-const app = express()
-const port = 4002
+const mqtt = require("mqtt");
 
-app.get('/', (req, res) => {
-    res.send('Bidding App is running')
-})
+const client = mqtt.connect("mqtt://localhost:1883");
 
-app.listen(port, () => {
-    console.log(`Bidding App listening on port ${port}`)
-})
+client.on("connect", function () {
+    client.subscribe("bidding", function (err) {
+        if (!err) {
+            client.publish("bidding", "Bidding app is connected & listening at topic bidding");
+        }
+    });
+});
+
+client.on("message", function (topic, message) {
+    // message is Buffer
+
+    // convert to string
+    const messageStr = message.toString();
+
+    // console log the message
+    console.log({ message: messageStr });
+});
