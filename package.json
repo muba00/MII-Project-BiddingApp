@@ -6,7 +6,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "~4.16.1",
     "mqtt": "^4.3.7"
   }
 }
