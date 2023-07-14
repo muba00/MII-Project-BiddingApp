@@ -18,9 +18,7 @@ client.on("connect", function () {
 });
 
 client.on("message", function (topic, message) {
-    // message is Buffer
-
-    // convert to string
+    // convert message from Buffer to string
     const messageStr = message.toString();
 
     // convert to JSON
