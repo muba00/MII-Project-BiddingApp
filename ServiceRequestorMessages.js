@@ -1,4 +1,11 @@
 
+/**
+ * Below messages are intended to be sent to the MQTT broker,
+ * by the ServiceRequestor.
+ */
+
+
+
 // Sample message for the call for proposal
 const callForProposal = {
     "frame": {
