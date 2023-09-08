@@ -53,7 +53,7 @@ client.on("message", function (topic, message) {
 });
 
 
-function handleCallForProposal(callForProposalMessage) {
+async function handleCallForProposal(callForProposalMessage) {
     if (!callForProposalMessage?.frame?.interactionElements) {
         console.log("No interaction elements found in callForProposal!");
         // notUnderstood
@@ -63,40 +63,40 @@ function handleCallForProposal(callForProposalMessage) {
     }
     else {
         // check the state of StoringSubmodel
-        const storingState = getStoringState();
+        const storingState = await getStoringState(); // Use await here
         console.log("StoringSubmodel state: " + storingState);
-        if (storingState) {
+        if (storingState === 1) { // Check for the specific values returned by getStoringState
             // StoringSubmodel is true / available
             console.log("StoringSubmodel is available, sending proposal...");
             client.publish("bidding", proposal(callForProposalMessage));
             console.log("Proposal sent");
-        }
-        else {
+        } else if (storingState === 2) {
             // StoringSubmodel is false / not available
             console.log("StoringSubmodel is not available");
             client.publish("bidding", refuse(callForProposalMessage));
             console.log("Refuse sent");
+        } else {
+            // Handle any other case, including errors (e.g., storingState === 3)
+            console.log("Unknown state or error occurred");
         }
     }
 }
 
 
 async function getStoringState() {
-    async function getStoringState() {
-        try {
-            const response = await fetch(storing_submodel_state_url);
-            const data = await response.json();
+    try {
+        const response = await fetch(storing_submodel_state_url);
+        const data = await response.json();
 
-            if (data?.value === "true") {
-                // StoringSubmodel is true / available
-                return 1;
-            } else {
-                // StoringSubmodel is false / not available
-                return 2;
-            }
-        } catch (error) {
-            console.log(error);
-            return 3;
+        if (data?.value === "true") {
+            // StoringSubmodel is true / available
+            return 1;
+        } else {
+            // StoringSubmodel is false / not available
+            return 2;
         }
+    } catch (error) {
+        console.log(error);
+        return 3;
     }
 }
