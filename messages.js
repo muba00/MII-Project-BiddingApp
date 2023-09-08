@@ -43,7 +43,7 @@ export const notUnderstood = (callForProposalMessage) => {
     return JSON.stringify(json);
 }
 
-export const refuse = () => {
+export const refuse = (messageJSON) => {
     let json = {
         "frame": {
             "semanticProtocol": {
@@ -88,7 +88,7 @@ export const refuse = () => {
 }
 
 
-export const proposal = () => {
+export const proposal = (messageJSON) => {
     let json = {
         "frame": {
             "semanticProtocol": {
