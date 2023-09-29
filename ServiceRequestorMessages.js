@@ -23,7 +23,7 @@ const callForProposal = {
         "messageId": "callForProposal_1847",
         "sender": {
             "identification": {
-                "id": "https://ovgu.de/aas/product",
+                "id": "http://localhost:6009/aas/product",
                 "idType": "URI"
             },
             "role": {
@@ -65,7 +65,7 @@ const acceptProposal = {
         ,
         "sender": {
             "identification": {
-                "id": "https://ovgu.de/aas/product"
+                "id": "http://localhost:6009/aas/product"
                 ,
                 "idType": "URI"
             },
@@ -81,7 +81,7 @@ const acceptProposal = {
         ,
         "receiver": {
             "identification": {
-                "id": "https://ovgu.de/aas/boringprovider1"
+                "id": "http://localhost:6009/aas/boringprovider1"
                 ,
                 "idType": "URI"
             },

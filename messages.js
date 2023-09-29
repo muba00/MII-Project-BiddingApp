@@ -15,7 +15,7 @@ export const notUnderstood = (callForProposalMessage) => {
             "messageId": "notUnderstood_913",
             "sender": {
                 "identification": {
-                    "id": "https://ovgu.de/aas/transportprovider"
+                    "id": "http://localhost:6009/aas/transportprovider"
                     ,
                     "idType": "URI"
                 },
@@ -28,7 +28,7 @@ export const notUnderstood = (callForProposalMessage) => {
             "conversationId": "ProductionOrder_111",
             "receiver": {
                 "identification": {
-                    "id": "https://ovgu.de/aas/product"
+                    "id": "http://localhost:6009/aas/product"
                     ,
                     "idType": "URI"
                 },
@@ -59,7 +59,7 @@ export const refuse = (messageJSON) => {
             "messageId": "refuse_913",
             "sender": {
                 "identification": {
-                    "id": "https://ovgu.de/aas/transportprovider"
+                    "id": "http://localhost:6009/aas/transportprovider"
                     ,
                     "idType": "URI"
                 },
@@ -72,7 +72,7 @@ export const refuse = (messageJSON) => {
             "conversationId": "ProductionOrder_111",
             "receiver": {
                 "identification": {
-                    "id": "https://ovgu.de/aas/product"
+                    "id": "http://localhost:6009/aas/product"
                     ,
                     "idType": "URI"
                 },
@@ -107,7 +107,7 @@ export const proposal = (messageJSON) => {
             ,
             "sender": {
                 "identification": {
-                    "id": "https://ovgu.de/aas/boringprovider1"
+                    "id": "http://localhost:6009/aas/boringprovider1"
                     ,
                     "idType": "URI"
                 }, "role": {
@@ -120,7 +120,7 @@ export const proposal = (messageJSON) => {
             ,
             "receiver": {
                 "identification": {
-                    "id": "https://ovgu.de/aas/product"
+                    "id": "http://localhost:6009/aas/product"
                     ,
                     "idType": "URI"
                 },
@@ -950,7 +950,7 @@ export const callForProposal = () => {
             "messageId": "callForProposal_1847",
             "sender": {
                 "identification": {
-                    "id": "https://ovgu.de/aas/product"
+                    "id": "http://localhost:6009/aas/product"
                     ,
                     "idType": "URI"
                 },
