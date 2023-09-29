@@ -37,18 +37,9 @@ client.on("message", function (topic, message) {
     // console log the message
     // console.log(messageJSON);
 
-    // if message is a callForProposal
-    if (messageJSON.hasOwnProperty("frame")) {
-        const frame = messageJSON.frame;
-
-        // Check if the "frame" object has the "type" property
-        if (frame.hasOwnProperty("type")) {
-            // Check if the "type" property is equal to "callForProposal"
-            if (frame.type === "callForProposal") {
-                console.log("Received callForProposal");
-                handleCallForProposal(messageJSON);
-            }
-        }
+    if (IsCallForProposal(messageJSON)) {
+        console.log("Received callForProposal");
+        handleCallForProposal(messageJSON);
     }
 });
 
@@ -99,4 +90,20 @@ async function getStoringState() {
         console.log(error);
         return 3;
     }
+}
+
+function IsCallForProposal(messageJSON) {
+    // check if message is a callForProposal
+    if (messageJSON.hasOwnProperty("frame")) {
+        const frame = messageJSON.frame;
+
+        // Check if the "frame" object has the "type" property
+        if (frame.hasOwnProperty("type")) {
+            // Check if the "type" property is equal to "callForProposal"
+            if (frame.type === "callForProposal") {
+                return true;
+            }
+        }
+    }
+    return false;
 }
