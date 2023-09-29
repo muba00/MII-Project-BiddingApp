@@ -61,14 +61,11 @@ async function handleCallForProposal(callForProposalMessage) {
             console.log("StoringSubmodel is available, sending proposal...");
             client.publish("bidding", proposal(callForProposalMessage));
             console.log("Proposal sent");
-        } else if (storingState === 2) {
+        } else {
             // StoringSubmodel is false / not available
             console.log("StoringSubmodel is not available");
             client.publish("bidding", refuse(callForProposalMessage));
             console.log("Refuse sent");
-        } else {
-            // Handle any other case, including errors (e.g., storingState === 3)
-            console.log("Unknown state or error occurred");
         }
     }
 }

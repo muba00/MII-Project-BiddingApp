@@ -1,7 +1,7 @@
 
 /**
  * Below messages are intended to be sent to the MQTT broker
- * from the ServiceRequestor
+ * from the ServiceRequestor (MQTTX client)
  */
 
 
