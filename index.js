@@ -54,8 +54,7 @@ async function handleCallForProposal(callForProposalMessage) {
     }
     else {
         // check the state of StoringSubmodel
-        const storingState = await getStoringState(); // Use await here
-        console.log("StoringSubmodel state: " + storingState);
+        const storingState = await getStoringState();
         if (storingState === 1) { // Check for the specific values returned by getStoringState
             // StoringSubmodel is true / available
             console.log("StoringSubmodel is available, sending proposal...");
