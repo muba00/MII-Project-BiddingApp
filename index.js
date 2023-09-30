@@ -8,7 +8,7 @@ import mqtt from "mqtt";
 
 const mqtt_url = "mqtt://localhost:1883";
 const digital_factory_aas_url = "http://localhost:4001/aasServer/shells/https%3A%2F%2Fexample.com%2Fids%2Faas%2F0245_9172_5012_5621/aas";
-const storing_submodel_state_url = digital_factory_aas_url + "/submodels/Capabilities/submodel/submodelElements/StoringState";
+const storing_submodel_state_url = digital_factory_aas_url + "/submodels/Capabilities/submodel/submodelElements/StoringState/value";
 
 const client = mqtt.connect(mqtt_url);
 
@@ -35,6 +35,13 @@ client.on("message", function (topic, message) {
         console.log("Received callForProposal");
         handleCallForProposal(messageJSON);
     }
+
+    if (IsAcceptProposal(messageJSON)) {
+        console.log("Received acceptProposal");
+        handleAcceptProposal(messageJSON);
+    }
+
+
 });
 
 
@@ -63,13 +70,17 @@ async function handleCallForProposal(callForProposalMessage) {
     }
 }
 
+async function handleAcceptProposal(acceptProposalMessage) {
+    setStoringState("false");
+}
+
 
 async function getStoringState() {
     try {
         const response = await fetch(storing_submodel_state_url);
-        const data = await response.json();
+        const data = await response.text();
 
-        if (data?.value === "true") {
+        if (data === "true") {
             // StoringSubmodel is true / available
             return 1;
         } else {
@@ -82,6 +93,28 @@ async function getStoringState() {
     }
 }
 
+/**
+ * @param {*} state 
+ *  - true: StoringSubmodel is available
+ *  - false: StoringSubmodel is not available
+ */
+async function setStoringState(state) {
+    try {
+        const response = await fetch(storing_submodel_state_url, {
+            method: "PUT",
+            body: state
+        });
+
+        if (response.ok) {
+            console.log("StoringSubmodel state set to " + state);
+        } else {
+            console.log("Error setting StoringSubmodel state to " + state);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function IsCallForProposal(messageJSON) {
     // check if message is a callForProposal
     if (messageJSON.hasOwnProperty("frame")) {
@@ -91,6 +124,22 @@ function IsCallForProposal(messageJSON) {
         if (frame.hasOwnProperty("type")) {
             // Check if the "type" property is equal to "callForProposal"
             if (frame.type === "callForProposal") {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function IsAcceptProposal(messageJSON) {
+    // check if message is a acceptProposal
+    if (messageJSON.hasOwnProperty("frame")) {
+        const frame = messageJSON.frame;
+
+        // Check if the "frame" object has the "type" property
+        if (frame.hasOwnProperty("type")) {
+            // Check if the "type" property is equal to "acceptProposal"
+            if (frame.type === "acceptProposal") {
                 return true;
             }
         }
