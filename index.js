@@ -1,7 +1,8 @@
 import {
     notUnderstood,
     refuse,
-    proposal
+    proposal,
+    informConfirm
 } from "./messages.js";
 
 import mqtt from "mqtt";
@@ -72,6 +73,7 @@ async function handleCallForProposal(callForProposalMessage) {
 
 async function handleAcceptProposal(acceptProposalMessage) {
     setStoringState("false");
+    client.publish("bidding", informConfirm(acceptProposalMessage));
 }
 
 

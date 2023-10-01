@@ -107,7 +107,7 @@ export const proposal = (messageJSON) => {
             ,
             "sender": {
                 "identification": {
-                    "id": "http://localhost:6009/aas/boringprovider1"
+                    "id": "http://localhost:6009/aas/storingprovider1"
                     ,
                     "idType": "URI"
                 }, "role": {
@@ -147,7 +147,7 @@ export const proposal = (messageJSON) => {
                     "idType": "IRI",
                     "id": "www.company.com/ids/sm/9155_8012_0102_7883"
                 },
-                "idShort": "Boring",
+                "idShort": "storing",
                 "modelType": {
                     "name": "Submodel"
                 },
@@ -966,6 +966,53 @@ export const callForProposal = () => {
             StoringSubmodel,
         ]
     };
+
+    return JSON.stringify(json);
+}
+
+export const informConfirm = (acceptProposal) => {
+    json = {
+        "frame": {
+            "semanticProtocol": {
+                "keys": [
+                    {
+                        "type": "GlobalReference",
+                        "local": "local",
+                        "value": "http://www.vdi.de/gma720/vdi2193_2/bidding"
+                        ,
+                        "idType": false
+                    }
+                ]
+            },
+            "type": "informConfirm",
+            "messageId": "informConfirm_918"
+            ,
+            "sender": {
+                "identification": {
+                    "id": "http://localhost:6009/aas/storingprovider1"
+                    ,
+                    "idType": "URI"
+                },
+                "role": {
+                    "name": "ServiceProvider"
+                }
+            },
+            "replyBy": "MQTT",
+            "replyTo": "MQTT",
+            "conversationId": "ProductionOrder_111",
+            "receiver": {
+                "identification": {
+                    "id": "http://localhost:6009/aas/product"
+                    ,
+                    "idType": "URI"
+                },
+                "role": {
+                    "name": "ServiceRequester"
+                }
+            }
+        }
+    }
+
 
     return JSON.stringify(json);
 }

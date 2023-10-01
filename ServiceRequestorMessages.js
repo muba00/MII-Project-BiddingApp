@@ -81,7 +81,7 @@ const acceptProposal = {
         ,
         "receiver": {
             "identification": {
-                "id": "http://localhost:6009/aas/boringprovider1"
+                "id": "http://localhost:6009/aas/storingprovider1"
                 ,
                 "idType": "URI"
             },
