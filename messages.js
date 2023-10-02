@@ -971,7 +971,7 @@ export const callForProposal = () => {
 }
 
 export const informConfirm = (acceptProposal) => {
-    json = {
+    let json = {
         "frame": {
             "semanticProtocol": {
                 "keys": [
